@@ -1,5 +1,5 @@
 {
-  "name": "lumitek-backend-express",
+  "name": "lumitek-backend-api",
   "version": "0.0.0",
   "private": true,
   "_moduleAliases": {
