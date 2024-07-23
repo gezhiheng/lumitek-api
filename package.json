@@ -7,20 +7,31 @@
     "@/service": "src/service"
   },
   "scripts": {
-    "start": "npm run prod",
-    "server": "babel-node ./src/bin/www",
+    "start": "npm run prod >> log.txt",
+    "server": "babel-node ./dist/bin/www",
     "dev": "cross-env NODE_ENV=development npm-run-all server",
     "clean": "rimraf dist",
     "build": "babel ./src --out-dir dist",
-    "prod": "NODE_ENV=production npm-run-all clean build server:prod",
+    "prod": "cross-env NODE_ENV=production npm-run-all clean build server",
     "watch": "nodemon",
     "format": "prettier --write ."
+  },
+  "nodemonConfig": {
+    "exec": "npm run dev",
+    "watch": [
+      "server/*",
+      "public/*"
+    ],
+    "ignore": [
+      "**/__tests__/**",
+      "*.test.js",
+      "*.spec.js"
+    ]
   },
   "dependencies": {
     "body-parser": "^1.20.2",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
-    "cross-env": "^7.0.3",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "module-alias": "^2.2.3",
@@ -36,6 +47,7 @@
     "@babel/core": "^7.24.4",
     "@babel/node": "^7.23.9",
     "@babel/preset-env": "^7.24.4",
+    "cross-env": "^7.0.3",
     "nodemon": "^3.1.4"
   }
 }
